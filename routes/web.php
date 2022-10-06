@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Http; //adicionado
+use App\Http\Controllers\ApiController; //adicionado
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $api = Http::get('https://api.github.com/users/Robertobarross');
+    $apiArray = $api->json();
+
+    return view('api', ['apiArray' => $apiArray]);
 });
