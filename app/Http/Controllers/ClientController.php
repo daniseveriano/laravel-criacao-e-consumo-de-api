@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller; //adicionado
+use App\Client; //adicionado
 
 class ClientController extends Controller
 {
@@ -11,9 +13,9 @@ class ClientController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index() //rota principal
     {
-        //
+        return Client::all();
     }
 
     /**
@@ -32,9 +34,17 @@ class ClientController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request) //Envio para banco de dados
     {
-        //
+        $request->validate([
+            'client' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'zipcode' => 'required',
+            'phone' => 'required',
+        ]);
+
+        return Client::create($request->all());
     }
 
     /**
@@ -43,9 +53,9 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id) //Fazer pesquisa pelo id
     {
-        //
+        return Client::findOrfail($id);
     }
 
     /**
