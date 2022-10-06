@@ -15,6 +15,11 @@ class CreateClientsTable extends Migration
     {
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
+            $table->string('client');
+            $table->string('address');
+            $table->string('city');
+            $table->string('zipcode');
+            $table->string('phone');
             $table->timestamps();
         });
     }
@@ -29,3 +34,5 @@ class CreateClientsTable extends Migration
         Schema::dropIfExists('clients');
     }
 }
+
+//php artisan migrate : envia tudo para o banco de dados depois da criacao
